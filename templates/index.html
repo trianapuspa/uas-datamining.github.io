@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediksi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="predict">
+            <form action="{{url_for('predict')}}" method="post">
+                <h3>PREDIKSI CALON PEMBELI MOBIL</h3>
+                <label for="">Usia</label>
+                <input type="text" name="Usia" placeholder="Masukan Usia" required/>
+                <label for="">Status</label>
+                <div class="note">
+                    *Note : 0 = Single, 1 = Menikah, 2 = Memiliki Anak, 3 = Janda/Duda
+                </div>
+                <input type="text" name="Status" placeholder="Masukan Status" required/>
+                <label for="">Jenis Kelamin</label>
+                <div class="note">
+                    *Note : 0 = Pria, 1 = Wanita
+                </div>
+                <input type="text" name="Kelamin" placeholder="Masukan Jenis Kelamin" required/>
+                <label for="">Keterangan Memiliki Mobil</label>
+                <input type="text" name="Memiliki_Mobil" placeholder="Masukan Keterangan Memiliki Mobil" required/>
+                <label for="">Jumlah Penghasilan</label>
+                <input type="text" name="Penghasilan" placeholder="Masukan Jumlah Penghasilan" required/>
+                <button type="submit">Predict</button>
+                <div class="hasil">
+                    {% if prediction_results %}
+                        <p><b><u>HASIL PREDIKSI</u></b></p>
+                        <p>Decision Tree: {{ 'Calon Pembeli Mobil' if prediction_results['decision_tree'] == 1 else 'Bukan Calon Pembeli Mobil' }}</p>
+                        <p>Logistic Regression: {{ 'Calon Pembeli Mobil' if prediction_results['logistic_regression'] == 1 else 'Bukan Calon Pembeli Mobil' }}</p>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+        <div class="right">
+            <img src="{{ url_for('static', filename='images/car.jpeg') }}" alt="Car Image">
+        </div>
+    </div>
+</body>
+</html>
